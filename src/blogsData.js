@@ -14,5 +14,7 @@ export const blogsData = [
   {
     title: "the Water Margin Characters",
     body: "The 108 Stars of Destiny are at the core of the plot of Water Margin. It inclues 36 Heaveenly stars and 72 Earthly Fiends",
+    author: "Lola",
+    id: 3,
   },
 ];
