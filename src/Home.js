@@ -4,7 +4,8 @@ import { BlogList } from "./BlogList";
 
 export const Home = () => {
   const [blogs, setBlogs] = useState(null);
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleDelete = (id) => {
     const newBlogs = blogs.filter((blog) => blog.id !== id);
@@ -13,26 +14,43 @@ export const Home = () => {
 
   useEffect(() => {
     fetch("http://localhost:8000/blogs")
-      .then((res) => res.json())
+      // .then((res) => res.json())
+      // adding error boundary
+      .then((res) => {
+        console.log("res", res);
+        if (!res.ok) {
+          throw Error(`Coudln't fetch data from the resource`);
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
         setBlogs(data);
-        setisLoading(false);
+        setIsLoading(false);
+        setError(null);
       })
-      .catch((err) => console.log(err.message));
+
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err.message);
+      });
   }, []);
   return (
     <div className="home">
-      {isLoading ? (
+      {error && (
         <div>
-          <h1>Loading...</h1>
+          <h2>{error}</h2>
         </div>
-      ) : (
+      )}
+      {isLoading && (
+        <div>
+          <h2>Loading...</h2>
+        </div>
+      )}
+
+      {blogs && (
         <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
       )}
-      {/* {blogs && (
-        <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
-      )} */}
     </div>
   );
 };
