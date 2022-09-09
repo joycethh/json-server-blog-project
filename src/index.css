@@ -62,7 +62,16 @@
 .blog-details div {
   margin: 20px 0;
 }
-
+.blog-details button {
+  font-size: 16px;
+  background:#00ADB5;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px 0;
+}
 
 /* create new blog form */
 .create {
