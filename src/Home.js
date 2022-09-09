@@ -8,7 +8,7 @@ export const Home = () => {
     data: blogs,
     isLoading,
     error,
-  } = useFetch("http://localhost:8000/blogs");
+  } = useFetch("https://jsonserver-blog-app.herokuapp.com/blogs");
 
   return (
     <div className="home">

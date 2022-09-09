@@ -10,10 +10,10 @@ export const BlogDetails = () => {
     data: blog,
     isLoading,
     error,
-  } = useFetch(`http://localhost:8000/blogs/${id}`);
+  } = useFetch(`https://jsonserver-blog-app.herokuapp.com/blogs/${id}`);
 
   const handleDelete = () => {
-    fetch(`http://localhost:8000/blogs/${id}`, {
+    fetch(`https://jsonserver-blog-app.herokuapp.com/blogs/${id}`, {
       method: "DELETE",
     }).then(() => navigate("/", { replace: true }));
   };

@@ -17,7 +17,7 @@ export const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newBlog = input;
-    fetch("http://localhost:8000/blogs", {
+    fetch("https://jsonserver-blog-app.herokuapp.com/blogs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

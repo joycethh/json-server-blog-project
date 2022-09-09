@@ -8,7 +8,7 @@ export const useFetch = (url) => {
   useEffect(() => {
     const abortCont = new AbortController();
     const signal = abortCont.signal;
-    console.log("signal", signal);
+
     fetch(url, signal)
       // .then((res) => res.json())
       // adding error boundary
