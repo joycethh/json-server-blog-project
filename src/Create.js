@@ -6,6 +6,7 @@ export const Create = () => {
     body: " ",
     author: " ",
   });
+  const [isPending, setIsPending] = useState(false);
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -16,9 +17,11 @@ export const Create = () => {
     const newBlog = input;
     fetch("http://localhost:8000/blogs", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(newBlog),
-    }).then(() => console.log("post request", fetch()));
+    }).then(() => setIsPending(true));
   };
 
   return (
@@ -40,10 +43,16 @@ export const Create = () => {
           onChange={handleChange}
         />
         <label>Author</label>
-        <select>
-          <option value={input.author}>{input.author}</option>
-        </select>
-        <button onClick={handleSubmit}>Submit</button>
+        <input
+          name="author"
+          type="text"
+          value={input.author}
+          onChange={handleChange}
+        />
+
+        <button onClick={handleSubmit}>
+          {isPending ? "Adding the new blog" : "Submit"}
+        </button>
       </form>
     </div>
   );
