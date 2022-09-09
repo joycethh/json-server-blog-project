@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Create = () => {
   const [input, setInput] = useState({
@@ -7,6 +8,7 @@ export const Create = () => {
     author: " ",
   });
   const [isPending, setIsPending] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -21,7 +23,10 @@ export const Create = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newBlog),
-    }).then(() => setIsPending(true));
+    }).then(() => {
+      setIsPending(true);
+      navigate("/", { replace: true });
+    });
   };
 
   return (
